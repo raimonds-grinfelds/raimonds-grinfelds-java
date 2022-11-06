@@ -19,6 +19,7 @@ public class House {
                 ", kadastralaVertiba=" + kadastralaVertiba +
                 ", vaiPrivatipasums=" + vaiPrivatipasums +
                 '}');
+        // mana maja
     }
 
     public House(int stavuDaudzums, int loguSkaits, int durvjuSkaits, String adrese, double griestuAugstums, long kadastralaVertiba, boolean vaiPrivatipasums) {
