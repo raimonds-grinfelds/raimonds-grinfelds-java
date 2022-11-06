@@ -34,8 +34,5 @@ public class person {
         return vecums;
     }
 
-    private long generatePersonasKods(){
 
-
-    }
 }

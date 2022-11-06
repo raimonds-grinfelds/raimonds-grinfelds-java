@@ -94,12 +94,12 @@ public class main {
 
 
 
-        Rinkis rinkisViens = new Rinkis();
+        Rinkis rinkisViens = new Rinkis(4);
         rinkisViens.r=5;
         System.out.println(rinkisViens.rekinatLaukumu());
         System.out.println(rinkisViens.rekinatLinijasGarumu());
 
-        Rinkis rinkisDivi = new Rinkis();
+        Rinkis rinkisDivi = new Rinkis(5);
         rinkisDivi.r=10;
         System.out.println(rinkisViens.rekinatLaukumu());
         System.out.println(rinkisViens.rekinatLinijasGarumu());

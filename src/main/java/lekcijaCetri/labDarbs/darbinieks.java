@@ -9,7 +9,7 @@ public class darbinieks {
 
     public void printDarbinieksInfo() {
         System.out.println("Darbinieks{" +
-                "darbinieks='" + darbinieks + '\'' +
+
                 ", amats=" + amats +
                 ", pieredze=" + pieredze + ", vecums=" + vecums +
                 '}');

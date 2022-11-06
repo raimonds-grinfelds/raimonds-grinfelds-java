@@ -1,10 +1,18 @@
 package lekcijaSesi.labDarbs;
 
+import com.github.javafaker.Faker;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.module.InvalidModuleDescriptorException;
 
 public class WordGenerator {
 
-    public static void main(String[] args) throws IDException {
+    public static void main(String[] args) throws IOException {
         //Blank Document
         Faker faker = new Faker();
         XWPFDocument document = new XWPFDocument();
