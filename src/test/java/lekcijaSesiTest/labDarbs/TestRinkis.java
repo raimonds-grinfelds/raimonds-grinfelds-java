@@ -2,6 +2,8 @@ package lekcijaSesiTest.labDarbs;
 
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestRinkis {
@@ -20,6 +22,19 @@ public class TestRinkis {
 
     }
 
+    @BeforeMethod
+    public void sagavatosanas(){
+        System.out.println("Šī metode tiek izpildīta pirms katra testa");
+    }
+
+    @AfterMethod
+    public void pecDarbibas(){ //tearDown
+        System.out.println("Šī metode tiek izpildīta pēc katra testa");
+    }
+
+
+
+
     @Test
     public void testRekinatLaukumuVesels() {
         System.out.println("Tests kurs teste ka rekinas rinka laukums");
@@ -27,7 +42,7 @@ public class TestRinkis {
 
         //expectedResult - sagaidamais rezultats
         //actualResult - realais rezultats
-        Double expectedArea = 58.24;
+        Double expectedArea = 50.24;
         Double actualArea = mansRinkis.rekinatLaukumu();
         //assert/assertion - parbaudes
         Assert.assertEquals(actualArea, expectedArea);
@@ -61,21 +76,6 @@ public class TestRinkis {
         Assert.assertEquals(actualLine,expectedLine);
     }
 
-    private void calculateAreaAndAssert(Double radiuss, Double sagaidamaisLaukums){
-        System.out.println("Tests kurš testē kā rēķinās riņķa laukums");
-        Rinkis mansRinkis = new Rinkis(radiuss);
-        //expectedResult - sagaidāmais rezultāts
-        //actualResult - reālais rezultāts
-        Double expectedArea = sagaidamaisLaukums;
-        Double actualArea = mansRinkis.rekinatLaukumu();
-        //assert/assertion - pārbaudes
-        Assert.assertEquals(actualArea,expectedArea);
-    }
 
-    private void calculateAreaAndAssert(Double radiuss, Double sagaidamaisLaukums){
-        System.out.println("Tests kurš testē kā rēķinās riņķa laukums");
-        Rinkis mansRinkis = new Rinkis(radiuss);
-        Assert.assertEquals(mansRinkis.rekinatLaukumu(),sagaidamaisLaukums);
-    }
 
 }
