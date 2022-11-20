@@ -1,10 +1,10 @@
 package lekcijaAstoni;
 
-import lekcijaAstoni.pageObjects.grozinsPage;
 import lekcijaAstoni.pageObjects.CheckoutPage;
 import lekcijaAstoni.pageObjects.LoginPage;
 import lekcijaAstoni.pageObjects.ProduktuPage;
-import lekcijaSeptini.labDarbs.BaseTest;
+import lekcijaAstoni.pageObjects.grozinsPage;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,6 +14,7 @@ public class TestScanerisDivi {
     public void testCheckoutPageMandatoryFields() throws InterruptedException {
         System.out.println("1. Navigēt uz saiti https://www.saucedemo.com/");
         System.out.println("2. Ielogoties ar pareizu lietotāja vārdu/paroli");
+        WebDriver parluks;
         LoginPage loginPage = new LoginPage(parluks);
         ProduktuPage produktuLapa = new ProduktuPage(parluks);
         loginPage.login("standard_user","secret_sauce");
