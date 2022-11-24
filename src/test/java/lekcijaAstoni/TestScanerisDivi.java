@@ -10,18 +10,19 @@ import org.testng.annotations.Test;
 
 public class TestScanerisDivi {
 
+    private WebDriver driver;
+
     @Test
     public void testCheckoutPageMandatoryFields() throws InterruptedException {
         System.out.println("1. Navigēt uz saiti https://www.saucedemo.com/");
         System.out.println("2. Ielogoties ar pareizu lietotāja vārdu/paroli");
-        WebDriver parluks;
-        LoginPage loginPage = new LoginPage(parluks);
-        ProduktuPage produktuLapa = new ProduktuPage(parluks);
+        LoginPage loginPage = new LoginPage(driver);
+        ProduktuPage produktuLapa = new ProduktuPage(driver);
         loginPage.login("standard_user","secret_sauce");
         Assert.assertEquals(produktuLapa.getPageTitle().getText(), "PRODUCTS");
 
         System.out.println("3. Doties uz grozu");
-        grozinsPage grozaLapa = new grozinsPage(parluks);
+        grozinsPage grozaLapa = new grozinsPage(driver);
         produktuLapa.getCartButton().click();
         Assert.assertEquals(grozaLapa.getPageTitle().getText(),"YOUR CART");
 
@@ -29,7 +30,7 @@ public class TestScanerisDivi {
         grozaLapa.getCheckoutButton().click();
 
         System.out.println("5. Pārbaudīt, ka FirstName/LastName/Zip code ir obligāts");
-        CheckoutPage checkoutLapa = new CheckoutPage(parluks);
+        CheckoutPage checkoutLapa = new CheckoutPage(driver);
         Assert.assertEquals(checkoutLapa.getPageTitle().getText(),"CHECKOUT: YOUR INFORMATION");
         checkoutLapa.clickContinueButton();
 
