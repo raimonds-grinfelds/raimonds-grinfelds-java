@@ -1,73 +1,61 @@
 package lekcijaSeptini.labDarbs;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import lekcijaAstoni.pageObjects.LoginPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import paObjectsHomework.InventoryPage;
 
-public class SauceDemoLoginTest extends BaseTest{
-    WebDriver parluks;
-    @BeforeMethod
-    public void setupBrowser(){
-        parluks = new ChromeDriver();
-        parluks.navigate().to("https://www.saucedemo.com/");
-    }
+public class SauceDemoLoginTest extends BaseTest {
 
-    @AfterMethod
-    public void tearDownBrowser(){
 
+    @Test
+    public void testLoginPageObjectExample() {
+        LoginPage loginPage = new LoginPage(parluks);
+        loginPage.login("asdasd", "asdasdasda");
+        Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username and password do not match any " +
+                "user in this service");
     }
 
     @Test
-    public void testLoginEmptyUsernameAndPassword() throws InterruptedException{
-        WebElement lietotajVardsIevadesLauks = parluks.findElement(By.id("user-name"));
-        lietotajVardsIevadesLauks.sendKeys("asdas");
+    public void testLoginWrongUsernameAndPassword() {
+        LoginPage loginPage = new LoginPage(parluks);
+        loginPage.login("asdasd", "asdasdasda");
+        Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username and password do not match any " +
+                "user in this service");
+    }
 
-        WebElement passwordField = parluks.findElement(By.id("password"));
-        passwordField.sendKeys("qwerty123");
+    @Test
+    public void testLoginEmptyUsernameAndPassword() {
+        LoginPage loginPage = new LoginPage(parluks);
+        loginPage.login("", "");
+        Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required");
+    }
 
-        WebElement loginPoga = parluks.findElement(By.id("login-button"));
-        loginPoga.click();
+    @Test
+    public void testLoginEmptyUsernameAndFilledPassword() {
+        LoginPage loginPage = new LoginPage(parluks);
+        loginPage.login("", "asdasdasdas");
+        Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required");
+    }
 
+    @Test
+    public void testLoginFilledUsernameAndEmptyPassword() {
+        LoginPage loginPage = new LoginPage(parluks);
+        loginPage.login("asdas", "");
+        Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Password is required");
+    }
 
-        WebElement errorTextField = parluks.findElement(By.cssSelector("div.error-message-container h3"));
+    @Test
+    public void testSuccessfulLogin() {
+        LoginPage loginPage = new LoginPage(parluks);
+        loginPage.login("standard_user", "secret_sauce");
+        InventoryPage produktuLapa = new InventoryPage(parluks);
 
-        String errorText = errorTextField.getText();
-        Assert.assertEquals(errorText,"Epic sadface: Username and password do not match any user in this service");
-
-
-        Thread.sleep(5000);
-
+        wait.until(ExpectedConditions.visibilityOf(produktuLapa.getPageTitle()));
+        Assert.assertEquals(produktuLapa.getPageTitle().getText(), "PRODUCTS");
 
     }
 
-
-
-
-
-
-
-
-    private void testLogin(String username, String password, String expectedErrorMessage){
-        WebElement lietotajVardsIevadesLauks = parluks.findElement(By.id("user-name"));
-        lietotajVardsIevadesLauks.sendKeys("asdas");
-
-        WebElement passwordField = parluks.findElement(By.id("password"));
-        passwordField.sendKeys("qwerty123");
-
-        WebElement loginPoga = parluks.findElement(By.id("login-button"));
-        loginPoga.click();
-
-
-        WebElement errorTextField = parluks.findElement(By.cssSelector("div.error-message-container h3"));
-
-        String errorText = errorTextField.getText();
-        Assert.assertEquals(errorText, expectedErrorMessage);
-
-    }
 }
